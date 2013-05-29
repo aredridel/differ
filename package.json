@@ -1,0 +1,31 @@
+{
+  "name": "differ",
+  "description": "Diff and patch Javascript objects",
+  "version": "0.1",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Jason Roberts",
+      "email": "jasonr11@gmail.com"
+    },
+    {
+      "name": "Guyon Roche",
+      "email": "guyon.roche@gmail.com"
+    }
+  ],
+  "main": "./lib/differ.js",
+  "keywords": [
+    "javascript",
+    "diff",
+    "patch"
+  ],
+  "dependencies": {
+    "uberclass-clouseau": "*"
+  },
+  "homepage": "http://uber.github.com/uber/differ",
+  "bugs": "https://github.com/uber/differ/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uber/differ.git"
+  }
+}

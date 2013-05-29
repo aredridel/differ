@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+    - 0.8
+    - 1.0
+
+notifications:
+    email:
+        recipients:
+            - dispatch@uber.com
+        on_success: change
+        on_failure: change
