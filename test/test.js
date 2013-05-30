@@ -1,7 +1,13 @@
 var clone = require('clone');
 var Differ = require('../lib/differ');
 
+function bootstrap(test) {
+    test.expect = test.expect || test.plan;
+    test.done = test.done || test.end;
+}
+
 function testDiffApply(obj1, obj2, test) {
+    bootstrap(test);
     test.expect(1);
 
     var differ = new Differ();
