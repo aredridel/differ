@@ -1,7 +1,7 @@
 var clone = require('clone');
 var Differ = require('../lib/differ');
 
-testDiffApply = function(obj1, obj2, test) {
+function testDiffApply(obj1, obj2, test) {
     test.expect(1);
 
     var differ = new Differ();
