@@ -1,21 +1,6 @@
 var clone = require('clone');
 var Differ = require('../lib/differ');
 
-function testDiffApply(obj1, obj2, test, message) {
-    test.expect(1);
-
-    var differ = new Differ();
-    var diff = differ.calcDiff(obj1, obj2);
-
-    var obj3 = clone(obj1);
-
-    differ.applyDiff(obj3, diff);
-
-    test.deepEqual(obj3, obj2, message);
-
-    test.done();
-}
-
 testDiffApply = function(obj1, obj2, test) {
     test.expect(1);
 
@@ -26,7 +11,7 @@ testDiffApply = function(obj1, obj2, test) {
 
     differ.applyDiff(obj3, diff);
 
-    assert.deepEqual(obj3, obj2, 'The objects are not equal.');
+    test.deepEqual(obj3, obj2, 'The objects are not equal.');
 
     test.done();
 }
