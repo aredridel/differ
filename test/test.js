@@ -1,4 +1,20 @@
-var Differ = require('../../lib/differ').Differ;
+var clone = require('clone');
+var Differ = require('../lib/differ');
+
+function testDiffApply(obj1, obj2, test, message) {
+    test.expect(1);
+
+    var differ = new Differ();
+    var diff = differ.calcDiff(obj1, obj2);
+
+    var obj3 = clone(obj1);
+
+    differ.applyDiff(obj3, diff);
+
+    test.deepEqual(obj3, obj2, message);
+
+    test.done();
+}
 
 exports.changePropertyValue = function(test) {
     var obj1 = { prop1: 3 };
@@ -521,18 +537,3 @@ exports.addingAnArrayToADeeplyEmbeddedObject = function(test) {
 
     testDiffApply(obj1, obj2, test, 'adding an array to a deeply embedded object');
 };
-
-function testDiffApply(obj1, obj2, test, message) {
-    test.expect(1);
-
-    var differ = new Differ();
-    var diff = differ.calcDiff(obj1, obj2);
-
-    var obj3 = clone(obj1);
-
-    differ.applyDiff(obj3, diff);
-
-    assert.deepEqual(obj3, obj2, message);
-
-    test.done();
-}
