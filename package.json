@@ -20,8 +20,11 @@
     "patch"
   ],
   "dependencies": {
-    "jshint": "*",
     "uberclass-clouseau": "*"
+  },
+  "devDependencies": {
+    "jshint": "*",
+    "nodeunit": "*"
   },
   "homepage": "http://uber.github.com/uber/differ",
   "bugs": "https://github.com/uber/differ/issues",

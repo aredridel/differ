@@ -1,572 +1,538 @@
-var should = require('should');
-
 var Differ = require('../../lib/differ').Differ;
 
-var differ = new Differ();
+exports.changePropertyValue = function(test) {
+    var obj1 = { prop1: 3 };
+    var obj2 = { prop1: 5 };
 
-describe('Differ', function(){
+    testDiffApply(obj1, obj2, test, 'changing a property value');
+};
 
-    describe('#calcDiff() / #applyDiff()', function() {
+exports.changeMultiplePropertyValues = function(test) {
+    var obj1 = { prop1: 3, prop2: 'Hello!' };
+    var obj2 = { prop1: 5, prop2: 'Goodbye!' };
 
-        it('changing a property value', function(done) {
-            var obj1 = { prop1: 3 };
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'changing multiple property values');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.addAProperty = function(test) {
+    var obj1 = {};
+    var obj2 = { prop1: 5 };
 
-        it('changing multiple property values', function(done) {
-            var obj1 = { prop1: 3, prop2: 'Hello!' };
-            var obj2 = { prop1: 5, prop2: 'Goodbye!' };
+    testDiffApply(obj1, obj2, test, 'adding a property');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.addMultipleProperties = function(test) {
+    var obj1 = {};
+    var obj2 = { prop1: 5, prop2: 'Hello!' };
 
-        it('adding a property', function(done) {
-            var obj1 = {};
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'adding multiple properties');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAProperty = function(test) {
+    var obj1 = { prop1: 5 };
+    var obj2 = {};
 
-        it('adding multiple properties', function(done) {
-            var obj1 = {};
-            var obj2 = { prop1: 5, prop2: 'Hello!' };
+    testDiffApply(obj1, obj2, test, 'removing a property');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeMultipleProperties = function(test) {
+    var obj1 = { prop1: 5, prop2: 'Hello!' };
+    var obj2 = {};
 
-        it('removing a property', function(done) {
-            var obj1 = { prop1: 5 };
-            var obj2 = {};
+    testDiffApply(obj1, obj2, test, 'removing multiple properties');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAnUndefinedProperty = function(test) {
+    var obj1 = { prop1: undefined };
+    var obj2 = {};
 
-        it('removing multiple properties', function(done) {
-            var obj1 = { prop1: 5, prop2: 'Hello!' };
-            var obj2 = {};
+    testDiffApply(obj1, obj2, test, 'removing an undefined property');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueFromNull = function(test) {
+    var obj1 = { prop1: null };
+    var obj2 = { prop1: 5 };
 
-        it('removing an undefined property', function(done) {
-            var obj1 = { prop1: undefined };
-            var obj2 = {};
+    testDiffApply(obj1, obj2, test, 'changing a value from null');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueToNull = function(test) {
+    var obj1 = { prop1: 5 };
+    var obj2 = { prop1: null };
 
-        it('changing a value from null', function(done) {
-            var obj1 = { prop1: null };
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'changing a value to null');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueFromUndefined = function(test) {
+    var obj1 = { prop1: undefined };
+    var obj2 = { prop1: 5 };
 
-        it('changing a value to null', function(done) {
-            var obj1 = { prop1: 5 };
-            var obj2 = { prop1: null };
+    testDiffApply(obj1, obj2, test, 'changing a value from undefined');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueToUndefined = function(test) {
+    var obj1 = { prop1: 5 };
+    var obj2 = { prop1: undefined };
 
-        it('changing a value from undefined', function(done) {
-            var obj1 = { prop1: undefined };
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'changing a value to undefined');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueFromFalse = function(test) {
+    var obj1 = { prop1: false };
+    var obj2 = { prop1: 5 };
 
-        it('changing a value to undefined', function(done) {
-            var obj1 = { prop1: 5 };
-            var obj2 = { prop1: undefined };
+    testDiffApply(obj1, obj2, test, 'changing a value from false');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueToFalse = function(test) {
+    var obj1 = { prop1: 5 };
+    var obj2 = { prop1: false };
 
-        it('changing a value from false', function(done) {
-            var obj1 = { prop1: false };
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'changing a value to false');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueFromZero = function(test) {
+    var obj1 = { prop1: 0 };
+    var obj2 = { prop1: 5 };
 
-        it('changing a value to false', function(done) {
-            var obj1 = { prop1: 5 };
-            var obj2 = { prop1: false };
+    testDiffApply(obj1, obj2, test, 'changing a value from zero');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueToZero = function(test) {
+    var obj1 = { prop1: 5 };
+    var obj2 = { prop1: 0 };
 
-        it('changing a value from zero', function(done) {
-            var obj1 = { prop1: 0 };
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'changing a value to zero');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueFromANumberToAString = function(test) {
+    var obj1 = { prop1: 5 };
+    var obj2 = { prop1: 'Hello!' };
 
-        it('changing a value to zero', function(done) {
-            var obj1 = { prop1: 5 };
-            var obj2 = { prop1: 0 };
+    testDiffApply(obj1, obj2, test, 'changing a value from a number to a string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAValueFromAStringToANumber = function(test) {
+    var obj1 = { prop1: 'Hello!' };
+    var obj2 = { prop1: 5 };
 
-        it('changing a value from a number to a string', function(done) {
-            var obj1 = { prop1: 5 };
-            var obj2 = { prop1: 'Hello!' };
+    testDiffApply(obj1, obj2, test, 'changing a value from a string to a number');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.shortenAString = function(test) {
+    var obj1 = { prop1: 'Hello, world!' };
+    var obj2 = { prop1: 'Hello!' };
 
-        it('changing a value from a string to a number', function(done) {
-            var obj1 = { prop1: 'Hello!' };
-            var obj2 = { prop1: 5 };
+    testDiffApply(obj1, obj2, test, 'shortening a string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.lengthenAString = function(test) {
+    var obj1 = { prop1: 'Hello!' };
+    var obj2 = { prop1: 'Hello, world!' };
 
-        it('shortening a string', function(done) {
-            var obj1 = { prop1: 'Hello, world!' };
-            var obj2 = { prop1: 'Hello!' };
+    testDiffApply(obj1, obj2, test, 'lengthening a string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAString = function(test) {
+    var obj1 = { prop1: 'Hello!' };
+    var obj2 = { prop1: 'Goodbye!' };
 
-        it('lengthening a string', function(done) {
-            var obj1 = { prop1: 'Hello!' };
-            var obj2 = { prop1: 'Hello, world!' };
+    testDiffApply(obj1, obj2, test, 'changing a string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAStringsCase = function(test) {
+    var obj1 = { prop1: 'hello!' };
+    var obj2 = { prop1: 'Hello!' };
 
-        it('changing a string', function(done) {
-            var obj1 = { prop1: 'Hello!' };
-            var obj2 = { prop1: 'Goodbye!' };
+    testDiffApply(obj1, obj2, test, 'changing a string\'s case');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeFromAnEmptyString = function(test) {
+    var obj1 = { prop1: '' };
+    var obj2 = { prop1: 'Hello!' };
 
-        it('changing a string\'s case', function(done) {
-            var obj1 = { prop1: 'hello!' };
-            var obj2 = { prop1: 'Hello!' };
+    testDiffApply(obj1, obj2, test, 'changing from an empty string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeToAnEmptyString = function(test) {
+    var obj1 = { prop1: 'Hello!' };
+    var obj2 = { prop1: '' };
 
-        it('changing from an empty string', function(done) {
-            var obj1 = { prop1: '' };
-            var obj2 = { prop1: 'Hello!' };
+    testDiffApply(obj1, obj2, test, 'changing to an empty string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyStringToUndefined = function(test) {
+    var obj1 = { prop1: '' };
+    var obj2 = { prop1: undefined };
 
-        it('changing to an empty string', function(done) {
-            var obj1 = { prop1: 'Hello!' };
-            var obj2 = { prop1: '' };
+    testDiffApply(obj1, obj2, test, 'changing an empty string to undefined');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeUndefinedToAnEmptyString = function(test) {
+    var obj1 = { prop1: undefined };
+    var obj2 = { prop1: '' };
 
-        it('changing an empty string to undefined', function(done) {
-            var obj1 = { prop1: '' };
-            var obj2 = { prop1: undefined };
+    testDiffApply(obj1, obj2, test, 'changing undefined to an empty string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyStringToNull = function(test) {
+    var obj1 = { prop1: '' };
+    var obj2 = { prop1: null };
 
-        it('changing undefined to an empty string', function(done) {
-            var obj1 = { prop1: undefined };
-            var obj2 = { prop1: '' };
+    testDiffApply(obj1, obj2, test, 'changing an empty string to null');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeNullToAnEmptyString = function(test) {
+    var obj1 = { prop1: null };
+    var obj2 = { prop1: '' };
 
-        it('changing an empty string to null', function(done) {
-            var obj1 = { prop1: '' };
-            var obj2 = { prop1: null };
+    testDiffApply(obj1, obj2, test, 'changing null to an empty string');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.addAnObject = function(test) {
+    var obj1 = { };
+    var obj2 = { prop1: { prop2: 'Hello!' } };
 
-        it('changing null to an empty string', function(done) {
-            var obj1 = { prop1: null };
-            var obj2 = { prop1: '' };
+    testDiffApply(obj1, obj2, test, 'adding an object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAPropertyInAnObject = function(test) {
+    var obj1 = { prop1: { prop2: 'Hello!' } };
+    var obj2 = { prop1: { prop2: 'Goodbye!' } };
 
-        it('adding an object', function(done) {
-            var obj1 = { };
-            var obj2 = { prop1: { prop2: 'Hello!' } };
+    testDiffApply(obj1, obj2, test, 'changing a property in an object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.addAPropertyToAnObject = function(test) {
+    var obj1 = { prop1: { prop2: 'Hello!' } };
+    var obj2 = { prop1: { prop2: 'Hello!', prop3: 5 } };
 
-        it('changing a property in an object', function(done) {
-            var obj1 = { prop1: { prop2: 'Hello!' } };
-            var obj2 = { prop1: { prop2: 'Goodbye!' } };
+    testDiffApply(obj1, obj2, test, 'adding a property to an object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAPropertyFromAnObject = function(test) {
+    var obj1 = { prop1: { prop2: 'Hello!', prop3: 5 } };
+    var obj2 = { prop1: { prop2: 'Hello!' } };
 
-        it('adding a property to an object', function(done) {
-            var obj1 = { prop1: { prop2: 'Hello!' } };
-            var obj2 = { prop1: { prop2: 'Hello!', prop3: 5 } };
+    testDiffApply(obj1, obj2, test, 'removing a property from an object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAnObject = function(test) {
+    var obj1 = { prop1: { prop2: 'Hello!' } };
+    var obj2 = { };
 
-        it('removing a property from an object', function(done) {
-            var obj1 = { prop1: { prop2: 'Hello!', prop3: 5 } };
-            var obj2 = { prop1: { prop2: 'Hello!' } };
+    testDiffApply(obj1, obj2, test, 'removing an object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyObjectToUndefined = function(test) {
+    var obj1 = { colors: {} };
+    var obj2 = { colors: undefined };
 
-        it('removing an object', function(done) {
-            var obj1 = { prop1: { prop2: 'Hello!' } };
-            var obj2 = { };
+    testDiffApply(obj1, obj2, test, 'changing an empty object to undefined');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnUndefinedPropertyToAnEmptyObject = function(test) {
+    var obj1 = { colors: undefined };
+    var obj2 = { colors: {} };
 
-        it('changing an empty object to undefined', function(done) {
-            var obj1 = { colors: {} };
-            var obj2 = { colors: undefined };
+    testDiffApply(obj1, obj2, test, 'changing an undefined property to an empty object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.addAnArray = function(test) {
+    var obj1 = { };
+    var obj2 = { colors: ['Red', 'Green', 'Blue'] };
 
-        it('changing an undefined property to an empty object', function(done) {
-            var obj1 = { colors: undefined };
-            var obj2 = { colors: {} };
+    testDiffApply(obj1, obj2, test, 'adding an array');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAnArray = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { };
 
-        it('adding an array', function(done) {
-            var obj1 = { };
-            var obj2 = { colors: ['Red', 'Green', 'Blue'] };
+    testDiffApply(obj1, obj2, test, 'removing an array');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.addAnElementToAnArray = function(test) {
+    var obj1 = { colors: ['Red', 'Green'] };
+    var obj2 = { colors: ['Red', 'Green', 'Blue'] };
 
-        it('removing an array', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { };
+    testDiffApply(obj1, obj2, test, 'adding an element to an array');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAnElementFromAnArray = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { colors: ['Red', 'Green'] };
 
-        it('adding an element to an array', function(done) {
-            var obj1 = { colors: ['Red', 'Green'] };
-            var obj2 = { colors: ['Red', 'Green', 'Blue'] };
+    testDiffApply(obj1, obj2, test, 'removing an element from an array');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.removeAllElementsFromAnArray = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { colors: [] };
 
-        it('removing an element from an array', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { colors: ['Red', 'Green'] };
+    testDiffApply(obj1, obj2, test, 'removing all elements from an array');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnArrayElement = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { colors: ['Red', 'Orange', 'Blue'] };
 
-        it('removing all elements from an array', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { colors: [] };
+    testDiffApply(obj1, obj2, test, 'changing an array element');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeANullArrayElementToUndefined = function(test) {
+    var obj1 = { colors: ['Red', null, 'Blue'] };
+    var obj2 = { colors: ['Red', undefined, 'Blue'] };
 
-        it('changing an array element', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { colors: ['Red', 'Orange', 'Blue'] };
+    testDiffApply(obj1, obj2, test, 'changing a null array element to undefined');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnUndefinedArrayElementToNull = function(test) {
+    var obj1 = { colors: ['Red', undefined, 'Blue'] };
+    var obj2 = { colors: ['Red', null, 'Blue'] };
 
-        it('changing a null array element to undefined', function(done) {
-            var obj1 = { colors: ['Red', null, 'Blue'] };
-            var obj2 = { colors: ['Red', undefined, 'Blue'] };
+    testDiffApply(obj1, obj2, test, 'changing an undefined array element to null');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyArrayToNull = function(test) {
+    var obj1 = { colors: [] };
+    var obj2 = { colors: null };
 
-        it('changing an undefined array element to null', function(done) {
-            var obj1 = { colors: ['Red', undefined, 'Blue'] };
-            var obj2 = { colors: ['Red', null, 'Blue'] };
+    testDiffApply(obj1, obj2, test, 'changing an empty array to null');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyArrayToUndefined = function(test) {
+    var obj1 = { colors: [] };
+    var obj2 = { colors: undefined };
 
-        it('changing an empty array to null', function(done) {
-            var obj1 = { colors: [] };
-            var obj2 = { colors: null };
+    testDiffApply(obj1, obj2, test, 'changing an empty array to undefined');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyArrayToAnEmptyObject = function(test) {
+    var obj1 = { colors: [] };
+    var obj2 = { colors: {} };
 
-        it('changing an empty array to undefined', function(done) {
-            var obj1 = { colors: [] };
-            var obj2 = { colors: undefined };
+    testDiffApply(obj1, obj2, test, 'changing an empty array to an empty object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyObjectToAnEmptyArray = function(test) {
+    var obj1 = { colors: {} };
+    var obj2 = { colors: [] };
 
-        it('changing an empty array to an empty object', function(done) {
-            var obj1 = { colors: [] };
-            var obj2 = { colors: {} };
+    testDiffApply(obj1, obj2, test, 'changing an empty object to an empty array');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeAnEmptyObjectToADate = function(test) {
+    var obj1 = { colors: {} };
+    var obj2 = { colors: new Date() };
 
-        it('changing an empty object to an empty array', function(done) {
-            var obj1 = { colors: {} };
-            var obj2 = { colors: [] };
+    testDiffApply(obj1, obj2, test, 'changing an empty object to a date');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
+exports.changeADateToAnEmptyObject = function(test) {
+    var obj1 = { colors: new Date() };
+    var obj2 = { colors: {} };
 
-        it('changing an empty object to a date', function(done) {
-            var obj1 = { colors: {} };
-            var obj2 = { colors: new Date() };
+    testDiffApply(obj1, obj2, test, 'changing a date to an empty object');
+};
 
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('changing a date to an empty object', function(done) {
-            var obj1 = { colors: new Date() };
-            var obj2 = { colors: {} };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('changing multiple array elements', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { colors: ['Red', 'Orange', 'Purple'] };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('changing array element types', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { colors: [2, 4, 7] };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('changing array element types and length', function(done) {
-            var obj1 = { colors: ['Red', 'Green', 'Blue'] };
-            var obj2 = { colors: [2, 4] };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('changing an element in an object in an array', function(done) {
-            var obj1 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }] };
-            var obj2 = { objects: [ { color: 'Red' }, { color: 'Orange' }, { color: 'Blue' }] };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('removing an object from an array', function(done) {
-            var obj1 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }] };
-            var obj2 = { objects: [ { color: 'Red' }, { color: 'Green' }] };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('adding an object to an array', function(done) {
-            var obj1 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }] };
-            var obj2 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }, { color: 'Orange' }] };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('changing the property value in a deeply embedded object', function(done) {
-            var obj1 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3
-                        }
+exports.changeMultipleArrayElements = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { colors: ['Red', 'Orange', 'Purple'] };
+
+    testDiffApply(obj1, obj2, test, 'changing multiple array elements');
+};
+
+exports.changeArrayElementTypes = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { colors: [2, 4, 7] };
+
+    testDiffApply(obj1, obj2, test, 'changing array element types');
+};
+
+exports.changeArrayElementTypesAndLength = function(test) {
+    var obj1 = { colors: ['Red', 'Green', 'Blue'] };
+    var obj2 = { colors: [2, 4] };
+
+    testDiffApply(obj1, obj2, test, 'changing array element types and length');
+};
+
+exports.changeAnElementInAnObjectInAnArray = function(test) {
+    var obj1 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }] };
+    var obj2 = { objects: [ { color: 'Red' }, { color: 'Orange' }, { color: 'Blue' }] };
+
+    testDiffApply(obj1, obj2, test, 'changing an element in an object in an array');
+};
+
+exports.removeAnObjectFromAnArray = function(test) {
+    var obj1 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }] };
+    var obj2 = { objects: [ { color: 'Red' }, { color: 'Green' }] };
+
+    testDiffApply(obj1, obj2, test, 'removing an object from an array');
+};
+
+exports.addAnObjectToAnArray = function(test) {
+    var obj1 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }] };
+    var obj2 = { objects: [ { color: 'Red' }, { color: 'Geen' }, { color: 'Blue' }, { color: 'Orange' }] };
+
+    testDiffApply(obj1, obj2, test, 'adding an object to an array');
+};
+
+exports.changeThePropertyValueInADeeplyEmbeddedObject = function(test) {
+    var obj1 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3
+                }
+            }
+        }
+    };
+    var obj2 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 5
+                }
+            }
+        }
+    };
+
+    testDiffApply(obj1, obj2, test, 'changing the property value in a deeply embedded object');
+};
+
+exports.addAPropertyToADeeplyEmbeddedObject = function(test) {
+    var obj1 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3
+                }
+            }
+        }
+    };
+    var obj2 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3,
+                    prop5: 'Hello!'
+                }
+            }
+        }
+    };
+
+    testDiffApply(obj1, obj2, test, 'adding a property to a deeply embedded object');
+};
+
+exports.removeAPropertyFromADeeplyEmbeddedObject = function(test) {
+    var obj1 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3,
+                    prop5: 'Hello!'
+                }
+            }
+        }
+    };
+    var obj2 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3
+                }
+            }
+        }
+    };
+
+    testDiffApply(obj1, obj2, test, 'removing a property from a deeply embedded object');
+};
+
+exports.addAnObjectToADeeplyEmbeddedObject = function(test) {
+    var obj1 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3
+                }
+            }
+        }
+    };
+    var obj2 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3,
+                    prop5: {
+                        prop6: 'Hello!'
                     }
                 }
-            };
-            var obj2 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 5
-                        }
-                    }
+            }
+        }
+    };
+
+    testDiffApply(obj1, obj2, test, 'adding an object to a deeply embedded object');
+};
+
+exports.alteringTheStructureOfADeeplyEmbeddedObject = function(test) {
+    var obj1 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3
                 }
-            };
+            }
+        }
+    };
+    var obj2 = {
+        prop1: {
+            prop2: {},
+            prop3: {
+                prop4: 3,
+                prop5: 'Hello!'
+            }
+        }
+    };
 
-            testDiffApply(obj1, obj2, done);
-        });
+    testDiffApply(obj1, obj2, test, 'altering the structure of a deeply embedded object');
+};
 
-        it('adding a property to a deeply embedded object', function(done) {
-            var obj1 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3
-                        }
-                    }
+exports.addingAnArrayToADeeplyEmbeddedObject = function(test) {
+    var obj1 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3
                 }
-            };
-            var obj2 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3,
-                            prop5: 'Hello!'
-                        }
-                    }
+            }
+        }
+    };
+    var obj2 = {
+        prop1: {
+            prop2: {
+                prop3: {
+                    prop4: 3,
+                    prop5: ['Red', 'Geen', 'Blue']
                 }
-            };
+            }
+        }
+    };
 
-            testDiffApply(obj1, obj2, done);
-        });
+    testDiffApply(obj1, obj2, test, 'adding an array to a deeply embedded object');
+};
 
-        it('removing a property from a deeply embedded object', function(done) {
-            var obj1 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3,
-                            prop5: 'Hello!'
-                        }
-                    }
-                }
-            };
-            var obj2 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3
-                        }
-                    }
-                }
-            };
+function testDiffApply(obj1, obj2, test, message) {
+    test.expect(1);
 
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('adding an object to a deeply embedded object', function(done) {
-            var obj1 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3
-                        }
-                    }
-                }
-            };
-            var obj2 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3,
-                            prop5: {
-                                prop6: 'Hello!'
-                            }
-                        }
-                    }
-                }
-            };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('altering the structure of a deeply embedded object', function(done) {
-            var obj1 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3
-                        }
-                    }
-                }
-            };
-            var obj2 = {
-                prop1: {
-                    prop2: {},
-                    prop3: {
-                        prop4: 3,
-                        prop5: 'Hello!'
-                    }
-                }
-            };
-
-            testDiffApply(obj1, obj2, done);
-        });
-
-        it('adding an array to a deeply embedded object', function(done) {
-            var obj1 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3
-                        }
-                    }
-                }
-            };
-            var obj2 = {
-                prop1: {
-                    prop2: {
-                        prop3: {
-                            prop4: 3,
-                            prop5: ['Red', 'Geen', 'Blue']
-                        }
-                    }
-                }
-            };
-
-            testDiffApply(obj1, obj2, done);
-        });
-    });
-});
-
-function testDiffApply(obj1, obj2, done) {
+    var differ = new Differ();
     var diff = differ.calcDiff(obj1, obj2);
 
     var obj3 = clone(obj1);
 
     differ.applyDiff(obj3, diff);
 
-    var str2 = JSON.stringify(obj2);
-    var str3 = JSON.stringify(obj3);
+    assert.deepEqual(obj3, obj2, message);
 
-    str3.should.equal(str2);
-
-    done();
-}
-
-function clone(src) {
-    if (src == null || typeof(src) != 'object') {
-        return src;
-    }
-
-    var c = null;
-
-    if (src instanceof Date) {
-        c = new Date(src.getTime());
-    } else if (src instanceof Array) {
-        c = [];
-        for(var i = 0; i < src.length; i++) {
-            c[i] = clone(src[i]);
-        }
-    } else {
-        c = {};
-        for(var i in src) {
-            c[i] = clone(src[i]);
-        }
-    }
-
-    return c;
+    test.done();
 }
