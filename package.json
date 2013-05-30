@@ -27,5 +27,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/uber/differ.git"
+  },
+  "scripts": {
+    "jshint": "test/jshint.sh",
+    "test": "npm run jshint && nodeunit test/*.js"
   }
 }
