@@ -1,7 +1,7 @@
 differ
 ======
 
-[![Build Status](https://travis-ci.org/uber/multitransport-jsonrpc.png?branch=master)](https://travis-ci.org/uber/differ)
+[![Build Status](https://travis-ci.org/uber/differ.png?branch=master)](https://travis-ci.org/uber/differ)
 
 The differ makes it easy to diff and patch simple or complex objects in Javascript.
 
@@ -13,14 +13,14 @@ It handles deletions, changes, additions and string appends.
 
 ## Library Usage
 
-    var Differ = require('../../lib/differ').Differ;
+    var Differ = require('differ').Differ;
     var differ = new Differ();
 
     // Create a person object
     var person = {
         firstName: 'John',
         lastName: 'Smith',
-        dateOfBirth: 'new Date(1970, 4, 1),
+        dateOfBirth: new Date(1970, 4, 1),
         employed: true,
         kids: [{
             name: 'Sarah',
@@ -31,22 +31,22 @@ It handles deletions, changes, additions and string appends.
         }]
     };
 
-    // Create a clone of the person object
+    // Create a copy of the person object
     var updatedPerson = JSON.parse(JSON.stringify(person));
 
     // Make some changes to the updatedPerson object
-    person2.employed = true;
-    person2.favoriteColor = 'green';
-    person2.kids[0].age = 7;
+    updatedPerson.employed = true;
+    updatedPerson.favoriteColor = 'green';
+    updatedPerson.kids[0].age = 7;
 
     // Calculate a diff between the person and updatedPerson objects
     var diff = differ.calcDiff(person, updatedPerson);
 
-    // Create another clone of the person object
-    var personClone = JSON.parse(JSON.stringify(person));
+    // Create another copy of the person object
+    var newPerson = JSON.parse(JSON.stringify(person));
 
-    // Apply the diff to personClone, which will make it equal to person
-    differ.patch(personClone, diff);
+    // Apply the diff to newPerson, which will make it equal to updatedPerson
+    differ.applyDiff(newPerson, diff);
 
 ## License (MIT)
 
