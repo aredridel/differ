@@ -24,7 +24,8 @@
   },
   "devDependencies": {
     "jshint": "*",
-    "nodeunit": "*"
+    "nodeunit": "*",
+    "clone": "*"
   },
   "homepage": "http://uber.github.com/uber/differ",
   "bugs": "https://github.com/uber/differ/issues",
