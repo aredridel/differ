@@ -25,7 +25,7 @@ It handles deletions, changes, additions and string appends.
         firstName: 'John',
         lastName: 'Smith',
         dateOfBirth: new Date(1970, 4, 1),
-        employed: true,
+        employed: false,
         kids: [{
             name: 'Sarah',
             age: 6
