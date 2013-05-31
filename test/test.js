@@ -17,7 +17,7 @@ function testDiffApply(obj1, obj2, test) {
 
     differ.applyDiff(obj3, diff);
 
-    test.deepEqual(obj3, obj2, 'The objects are not equal.');
+    test.equal(JSON.stringify(obj3), JSON.stringify(obj2), 'The objects are not equal.');
 
     test.done();
 }
