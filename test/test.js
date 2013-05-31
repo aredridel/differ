@@ -1,5 +1,5 @@
+var Differ;
 var clone = require('clone');
-var Differ = require('../lib/differ');
 
 function bootstrap(test) {
     test.expect = test.expect || test.plan;
@@ -21,6 +21,10 @@ function testDiffApply(obj1, obj2, test) {
 
     test.done();
 }
+
+exports.getDiffer = function(difObj) {
+    Differ = difObj;
+};
 
 exports.changePropertyValue = function(test) {
     var obj1 = { prop1: 3 };
