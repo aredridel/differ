@@ -3,7 +3,7 @@ differ
 
 [![Build Status](https://travis-ci.org/uber/differ.png?branch=master)](https://travis-ci.org/uber/differ)
 
-[![browser support](https://ci.testling.com/uber/differ.png?branch=master)](https://ci.testling.com/uber/differ)
+[![browser support](https://ci.testling.com/uber/differ.png)](https://ci.testling.com/uber/differ)
 
 The differ makes it easy to diff and patch simple or complex objects in Javascript.
 
