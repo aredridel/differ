@@ -14,8 +14,10 @@ It handles deletions, changes, additions and string appends.
     npm install differ
 
 ## Library Usage
+    // This line is not needed for browser usage. When you include differ.js, Differ is
+    // added to the global namespace
+    var Differ = require('differ');
 
-    var Differ = require('differ').Differ;
     var differ = new Differ();
 
     // Create a person object
