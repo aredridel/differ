@@ -26,7 +26,8 @@
     "jshint": "*",
     "nodeunit": "*",
     "clone": "*",
-    "tape": "*"
+    "tape": "*",
+    "jscoverage": "*"
   },
   "homepage": "http://uber.github.com/uber/differ",
   "bugs": "https://github.com/uber/differ/issues",
@@ -36,7 +37,7 @@
   },
   "scripts": {
     "jshint": "test/jshint.sh",
-    "test": "npm run jshint && nodeunit test/test.js",
+    "test": "npm run jshint && nodeunit test/test-node.js",
     "testbrowser": "tape test/test-browser.js"
   },
   "testling": {

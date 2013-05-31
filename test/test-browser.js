@@ -1,7 +1,9 @@
 var tape = require('tape');
+var Differ = require('../lib/differ');
+var differTests = require('./test');
 
-var tests = require('./test');
+differTests.getDiffer(Differ);
 
-for(var key in tests) {
-    if(tests.hasOwnProperty(key)) tape(key, tests[key]);
+for(var key in differTests) {
+    if(key !== 'getDiffer' && differTests.hasOwnProperty(key)) tape(key, differTests[key]);
 }
