@@ -1,7 +1,7 @@
 differ
 ======
 
-[![Build Status](https://travis-ci.org/uber/differ.png?branch=master)](https://travis-ci.org/uber/differ)
+[![Build Status](https://travis-ci.org/uber/differ.png?branch=master)](https://travis-ci.org/uber/differ) [![Dependency Status](https://david-dm.org/uber/differ.png)](https://david-dm.org/uber/differ)
 
 [![browser support](https://ci.testling.com/uber/differ.png)](https://ci.testling.com/uber/differ)
 
