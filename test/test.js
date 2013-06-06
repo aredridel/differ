@@ -547,3 +547,80 @@ exports.addingAnArrayToADeeplyEmbeddedObject = function(test) {
 
     testDiffApply(obj1, obj2, test);
 };
+
+exports.changeDateValues = function(test) {
+    var obj1 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+    var obj2 = { prop1: new Date(2013, 8, 5, 12, 45, 30) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromAnObjectToADate = function(test) {
+    var obj1 = { prop1: {} };
+    var obj2 = { prop1: new Date(2013, 8, 5, 12, 45, 30) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromADateToAnObject = function(test) {
+    var obj1 = { prop1: {} };
+    var obj2 = { prop1: new Date(2013, 8, 5, 12, 45, 30) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromUndefinedToADate = function(test) {
+    var obj1 = { prop1: undefined };
+    var obj2 = { prop1: new Date(2013, 8, 5, 12, 45, 30) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromNullToADate = function(test) {
+    var obj1 = { prop1: null };
+    var obj2 = { prop1: new Date(2013, 8, 5, 12, 45, 30) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromDateToUndefined = function(test) {
+    var obj1 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+    var obj2 = { prop1: undefined };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromDateToNull = function(test) {
+    var obj1 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+    var obj2 = { prop1: null };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromStringToDate = function(test) {
+    var obj1 = { prop1: '2013-07-04 10:30:00 GMT' };
+    var obj2 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromNumberToDate = function(test) {
+    var obj1 = { prop1: 2013 };
+    var obj2 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromDateToString = function(test) {
+    var obj1 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+    var obj2 = { prop1: '2013-07-04 10:30:00 GMT' };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeFromDateToNumber = function(test) {
+    var obj1 = { prop1: new Date(2013, 7, 4, 10, 30, 0) };
+    var obj2 = { prop1: 2013 };
+
+    testDiffApply(obj1, obj2, test);
+};
