@@ -14,43 +14,46 @@ It handles deletions, changes, additions and string appends.
     npm install differ
 
 ## Library Usage
-    // This line is not needed for browser usage. When you include differ.js, Differ is
-    // added to the global namespace
-    var Differ = require('differ');
 
-    var differ = new Differ();
+```js
+// This line is not needed for browser usage. When you include differ.js, Differ is
+// added to the global namespace
+var Differ = require('differ');
 
-    // Create a person object
-    var person = {
-        firstName: 'John',
-        lastName: 'Smith',
-        dateOfBirth: new Date(1970, 4, 1),
-        employed: false,
-        kids: [{
-            name: 'Sarah',
-            age: 6
-        }, {
-            name: 'William',
-            age: 4
-        }]
-    };
+var differ = new Differ();
 
-    // Create a copy of the person object
-    var updatedPerson = JSON.parse(JSON.stringify(person));
+// Create a person object
+var person = {
+    firstName: 'John',
+    lastName: 'Smith',
+    dateOfBirth: new Date(1970, 4, 1),
+    employed: false,
+    kids: [{
+        name: 'Sarah',
+        age: 6
+    }, {
+        name: 'William',
+        age: 4
+    }]
+};
 
-    // Make some changes to the updatedPerson object
-    updatedPerson.employed = true;
-    updatedPerson.favoriteColor = 'green';
-    updatedPerson.kids[0].age = 7;
+// Create a copy of the person object
+var updatedPerson = JSON.parse(JSON.stringify(person));
 
-    // Calculate a diff between the person and updatedPerson objects
-    var diff = differ.calcDiff(person, updatedPerson);
+// Make some changes to the updatedPerson object
+updatedPerson.employed = true;
+updatedPerson.favoriteColor = 'green';
+updatedPerson.kids[0].age = 7;
 
-    // Create another copy of the person object
-    var newPerson = JSON.parse(JSON.stringify(person));
+// Calculate a diff between the person and updatedPerson objects
+var diff = differ.calcDiff(person, updatedPerson);
 
-    // Apply the diff to newPerson, which will make it equal to updatedPerson
-    differ.applyDiff(newPerson, diff);
+// Create another copy of the person object
+var newPerson = JSON.parse(JSON.stringify(person));
+
+// Apply the diff to newPerson, which will make it equal to updatedPerson
+differ.applyDiff(newPerson, diff);
+```
 
 ## License (MIT)
 
