@@ -215,6 +215,62 @@ exports.changeNullToAnEmptyString = function(test) {
     testDiffApply(obj1, obj2, test);
 };
 
+exports.changeNullToAnEmptyObject = function(test) {
+    var obj1 = { prop1: null };
+    var obj2 = { prop1: { prop2: {} } };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeAnEmptyObjectToNull = function(test) {
+    var obj1 = { prop1: { prop2: {} } };
+    var obj2 = { prop1: null };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeNullToAnObject = function(test) {
+    var obj1 = { prop1: null };
+    var obj2 = { prop1: { prop2: 'Hello!' } };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeAnObjectToNull = function(test) {
+    var obj1 = { prop1: { prop2: 'Hello!' } };
+    var obj2 = { prop1: null };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeUndefinedToAnEmptyObject = function(test) {
+    var obj1 = { prop1: undefined };
+    var obj2 = { prop1: { prop2: {} } };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeAnEmptyObjectToUndefined = function(test) {
+    var obj1 = { prop1: { prop2: {} } };
+    var obj2 = { prop1: undefined };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeUndefinedToAnObject = function(test) {
+    var obj1 = { prop1: undefined };
+    var obj2 = { prop1: { prop2: 'Hello!' } };
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.changeAnObjectToUndefined = function(test) {
+    var obj1 = { prop1: { prop2: 'Hello!' } };
+    var obj2 = { prop1: undefined };
+
+    testDiffApply(obj1, obj2, test);
+};
+
 exports.addAnObject = function(test) {
     var obj1 = { };
     var obj2 = { prop1: { prop2: 'Hello!' } };
