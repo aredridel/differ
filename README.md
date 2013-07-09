@@ -1,7 +1,7 @@
 differ
 ======
 
-[![Build Status](https://travis-ci.org/uber/differ.png?branch=master)](https://travis-ci.org/uber/differ) [![Dependency Status](https://david-dm.org/uber/differ.png)](https://david-dm.org/uber/differ) [![Coverage Status](https://coveralls.io/repos/uber/differ/badge.png?branch=master)](https://coveralls.io/r/uber/differ?branch=master)
+[![NPM version](https://badge.fury.io/js/differ.png)](http://badge.fury.io/js/differ) [![Dependency Status](https://gemnasium.com/uber/differ.png)](https://gemnasium.com/uber/differ) [![Build Status](https://travis-ci.org/uber/differ.png?branch=master)](https://travis-ci.org/uber/differ) [![Coverage Status](https://coveralls.io/repos/uber/differ/badge.png?branch=master)](https://coveralls.io/r/uber/differ?branch=master)
 
 [![browser support](https://ci.testling.com/uber/differ.png)](https://ci.testling.com/uber/differ)
 
