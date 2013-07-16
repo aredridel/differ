@@ -711,13 +711,13 @@ exports.changeNullToSimpleArray = function(test) {
 
 exports.changeSimpleArrayToUndefined = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = undefined;
+    var obj2;
 
     testDiffApply(obj1, obj2, test);
 };
 
 exports.changeUndefinedToSimpleArray = function(test) {
-    var obj1 = undefined;
+    var obj1;
     var obj2 = ['Red', 'Green', 'Blue'];
 
     testDiffApply(obj1, obj2, test);
@@ -753,13 +753,13 @@ exports.changeHashToSimpleArray = function(test) {
 
 exports.changeSimpleArrayToDate = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = new Date(2013, 8, 5, 12, 45, 30)
+    var obj2 = new Date(2013, 8, 5, 12, 45, 30);
 
     testDiffApply(obj1, obj2, test);
 };
 
 exports.changeDateToSimpleArray = function(test) {
-    var obj1 = new Date(2013, 8, 5, 12, 45, 30)
+    var obj1 = new Date(2013, 8, 5, 12, 45, 30);
     var obj2 = ['Red', 'Green', 'Blue'];
 
     testDiffApply(obj1, obj2, test);
