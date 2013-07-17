@@ -695,34 +695,6 @@ exports.addElementToSimpleArray = function(test) {
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeSimpleArrayToNull = function(test) {
-    var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = null;
-
-    testDiffApply(obj1, obj2, test);
-};
-
-exports.changeNullToSimpleArray = function(test) {
-    var obj1 = null;
-    var obj2 = ['Red', 'Green', 'Blue'];
-
-    testDiffApply(obj1, obj2, test);
-};
-
-exports.changeSimpleArrayToUndefined = function(test) {
-    var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2;
-
-    testDiffApply(obj1, obj2, test);
-};
-
-exports.changeUndefinedToSimpleArray = function(test) {
-    var obj1;
-    var obj2 = ['Red', 'Green', 'Blue'];
-
-    testDiffApply(obj1, obj2, test);
-};
-
 exports.changeSimpleArrayToEmptyObject = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
     var obj2 = {};
