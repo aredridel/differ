@@ -681,70 +681,56 @@ exports.changeFromDateToNumber = function(test) {
     testDiffApply(obj1, obj2, test);
 };
 
-exports.removeElementFromSimpleArray = function(test) {
-    var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = ['Red', 'Green'];
-
-    testDiffApply(obj1, obj2, test);
-};
-
-exports.addElementToSimpleArray = function(test) {
+exports.addElementToTopLevelArray = function(test) {
     var obj1 = ['Red', 'Green'];
     var obj2 = ['Red', 'Green', 'Blue'];
 
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeSimpleArrayToEmptyObject = function(test) {
+exports.addElementsToTopLevelArray = function(test) {
+    var obj1 = ['Red', 'Green'];
+    var obj2 = ['Red', 'Green', 'Blue', 'Yellow'];
+
+    testDiffApply(obj1, obj2, test);
+};
+
+exports.removeElementFromTopLevelArray = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = {};
+    var obj2 = ['Red', 'Green'];
 
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeEmptyObjectToSimpleArray = function(test) {
-    var obj1 = {};
-    var obj2 = ['Red', 'Green', 'Blue'];
-
-    testDiffApply(obj1, obj2, test);
-};
-
-exports.changeSimpleArrayToHash = function(test) {
+exports.removeAllElementsFromTopLevelArray = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = { 'Red': 1, 'Green': 2, 'Blue': 3 };
+    var obj2 = [];
 
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeHashToSimpleArray = function(test) {
-    var obj1 = { 'Red': 1, 'Green': 2, 'Blue': 3 };
-    var obj2 = ['Red', 'Green', 'Blue'];
-
-    testDiffApply(obj1, obj2, test);
-};
-
-exports.changeSimpleArrayToDate = function(test) {
+exports.changeElementInTopLevelArray = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
-    var obj2 = new Date(2013, 8, 5, 12, 45, 30);
+    var obj2 = ['Red', 'Yellow', 'Blue'];
 
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeDateToSimpleArray = function(test) {
-    var obj1 = new Date(2013, 8, 5, 12, 45, 30);
-    var obj2 = ['Red', 'Green', 'Blue'];
+exports.changeObjectInTopLevelArray = function(test) {
+    var obj1 = ['Red', 'Green', { prop1: 'Blue' }];
+    var obj2 = ['Red', 'Yellow', { prop1: 2 }];
 
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeSimpleArrayToSimpleTwoDimensionalArray = function(test) {
+exports.changeTopLevelArrayToTwoDimensionalArray = function(test) {
     var obj1 = ['Red', 'Green', 'Blue'];
     var obj2 = ['Red', [1, 2, 3], 'Blue'];
 
     testDiffApply(obj1, obj2, test);
 };
 
-exports.changeSimpleTwoDimensionalArrayToSimpleArray = function(test) {
+exports.changeTopLevelTwoDimensionalArrayToArray = function(test) {
     var obj1 = ['Red', [1, 2, 3], 'Blue'];
     var obj2 = ['Red', 'Green', 'Blue'];
 
